@@ -1,0 +1,33 @@
+
+# Is Stacks a Bitcoin L2? 
+
+Stacks is a Bitcoin layer for smart contracts. The classification as a layer-1 (L1) or layer-2 (L2) or sidechain really depends on the definition used. With that said, generally speaking L1 chains are sovereign meaning that (a) they have their own security budget, and (b) they can survive without the need for any other L1 chain. L2 chains typically do not have their own security budget and share the security of the underlying L1 chain, and they cannot live without the underlying L1 chain.
+
+The initial release of Stacks in early 2021 had a separate security budget from Bitcoin L1. Even though the Stacks layer could not function without Bitcoin L1, the developers working on the project described it as a different system that does not fit neatly into existing classifications, sometimes using the term layer 1.5 (see [this Decrypt article](https://decrypt.co/82019/bitcoin-defi-thing-says-stacks-founder-muneeb-ali) for example).
+
+The upcoming planned release of Stacks, called the Nakamoto release (convention to use names of famous Computer Scientists for major releases), will no longer have a separate security budget from Bitcoin. Instead, a 100% of Bitcoin hashpower will determine finality on Stacks layer. After the next upgrade, to reorg Stacks blocks/transactions the attacker will need to reorg Bitcoin L1 itself (which is very hard to do and therefore a great security property for a Bitcoin layer to have). More details in the [Stacks paper](https://stacks.co/stacks.pdf).
+
+The definition of [L2 used in Ethereum](https://ethereum.org/en/layer-2/) and other newer ecosystems is different and focuses on the ability to withdraw assets using only L1 security and L1 miners. According to that definition Stacks layer is not a clear L2, given the set of peg-out signers determine if users can withdraw sBTC. Bitcoin cannot support such verification without changes to Bitcoin L1 (which may happen in the future). The second property of L2s is that you typically need to attack the underlying L1 to reorg the L2, called reorg resistance. Stacks, after Nakamoto release, will have Bitcoin reorg resistance making it closer to a L2.
+
+Using the strict technical definition of only L1 security used for withdrawing assets from L2, Lightning will be the only Bitcoin layer that'd qualify today. However, if also considering the reorg resistance dimension then Stacks starts to look closer to a L2 with a potential path where once/if Bitcoin L1 introduces new opcodes then BTC can be withdrawn out from Stacks L2 using only Bitcoin L1 security (and no need for decentralized signers).
+
+The term L2 has been widely used in the Bitcoin community even before Ethereum existed. Users and developers organically call Stacks a Bitcoin L2, since it is a simpler concept to understand. There are certain properties of Stacks layer that also help the concept of Stacks as a Bitcoin L2:
+
+1) Bitcoin finality, as discussed above, where 100% of the Bitcoin hashpower decides block ordering and transaction finality. 
+2) Stacks consensus runs on Bitcoin L1, and Stacks L2 cannot operate or survive without Bitcoin L1.
+3) With the upcoming decentralized Bitcoin peg, called sBTC (see [sBTC paper](https://stacks.co/sbtc.pdf)), most of economy on Stacks layer will likely use BTC as the unit of economy. It is expected that most users will simply use Bitcoin in wallets and apps and then peg out their BTC to Bitcoin L1.
+4) All data and transactions on Stacks are automatically hashed and permanently stored on Bitcoin L1 on every Bitcoin block. Anyone can verify that some data on Stacks is valid by checking the corresponding hash on Bitcoin L1. This compact storage of hashes on L1 is somewhat similar to rollups (although there are other differences).
+5) Contracts on Stacks layer can read Bitcoin L1 transactions and respond to them. Assets on Stacks layer can be moved simply through Bitcoin L1 transactions.
+
+Given all the details above, why would some people think that Stacks is not a Bitcoin L2? There are a couple of reasons why this question comes up often:
+1) The initial version of Stacks (released early 2021) had a separate security budget which changed to following 100% Bitcoin hashpower with the Nakamoto release. There is old material and blog posts floating around that still talk about the initial Stacks version. The old materials will likely get updated with time.
+2) According to the Ethereum definition of L2s a user should be able to withdraw their base-layer assets purely by doing a L1 transaction and relying only on L1 security (this is true for Lightning for example). In an ideal world Bitcoin miners can validate such transactions but that would require a change to Bitcoin L1. Therefore, Stacks design optimizes for a method that is decentralized and can be deployed without any changes to Bitcoin L1 today. If in the future it is possible to make changes to Bitcoin L1 then Stacks layer can benefit from that as well.
+3) Bitcoin community members are generally skeptical of claims and on a look out for people making any false marketing claims. This is generally a healthy thing for the Bitcoin ecosystem and builds up the immune system. Some such community members might be skeptical about Stacks as a Bitcoin layer or L2 until they fully read the technical details and reasoning. There is a [good Twitter thread](https://twitter.com/lopp/status/1623756872976158722?s=20) about his topic as well.
+
+Why don't we use the term 'sidechain' for Stacks then? Sidechains in Bitcoin typically have a different security budget from Bitcoin L1, typically as a subset of Bitcoin miners who participate in the sidechain (they don't follow 100% Bitcoin finality), their consensus runs on the sidechain (vs running on Bitcoin L1), and they don't publish their data/hashes on Bitcoin L1. The Stacks layer does not fit that definition cleanly given the consensus runs on Bitcoin L1, it will follow Bitcoin finality, and publishes data/hashes on L1.
+
+The TLDR is that it is better to refer to Stacks as a Bitcoin layer (the more generic term). However, the Bitcoin L2 term is more organic and simpler for users and we'll likely keep seeing the use of it. If the Bitcoin L2 term comes up then it's important to understand the technical differences and that unlike Ethereum L2s withdrawing BTC from Stacks requires signatures from peg-out signers.
+
+Hope this FAQ is helpful. If you have more comments or questions then feel free to [start a Github issue](https://github.com/stacks-network/stacks/issues/new) for discussion.
+
+Related FAQ: [Why is the STX token needed for Stacks?](https://github.com/stacks-network/stacks/blob/master/why-stx.md)
